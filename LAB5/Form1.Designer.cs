@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pbMain = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -36,16 +38,23 @@
             // 
             this.pbMain.Location = new System.Drawing.Point(12, 12);
             this.pbMain.Name = "pbMain";
-            this.pbMain.Size = new System.Drawing.Size(660, 437);
+            this.pbMain.Size = new System.Drawing.Size(450, 450);
             this.pbMain.TabIndex = 0;
             this.pbMain.TabStop = false;
             this.pbMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pbMain_Paint);
+            this.pbMain.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbMain_MouseClick);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 30;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 461);
+            this.ClientSize = new System.Drawing.Size(688, 487);
             this.Controls.Add(this.pbMain);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -57,6 +66,7 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pbMain;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

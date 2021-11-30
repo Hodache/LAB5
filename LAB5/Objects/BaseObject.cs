@@ -13,6 +13,7 @@ namespace LAB5.Objects
         public float Angle;
 
         public Action<BaseObject, BaseObject> OnOverlap;
+        public Action OnDisappear;
 
         public BaseObject(float x, float y, float angle)
         {

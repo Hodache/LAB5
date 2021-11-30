@@ -8,13 +8,15 @@ namespace LAB5.Objects
 {
     class MyPoint : BaseObject
     {
+        public float Size;
+
         public MyPoint(float x, float y, float angle) : base(x, y, angle)
         {
         }
 
         public override void Render(Graphics g)
         {
-            g.FillEllipse(new SolidBrush(Color.LightGreen), -15, -15, 30, 30);
+            g.FillEllipse(new SolidBrush(Color.LightGreen), -15, -15, Size, Size);
         }
 
         public override String GetName()
@@ -25,7 +27,7 @@ namespace LAB5.Objects
         public override GraphicsPath GetGraphicsPath()
         {
             var path = base.GetGraphicsPath();
-            path.AddEllipse(-15, -15, 30, 30);
+            path.AddEllipse(-15, -15, Size, Size);
             return path;
         }
     }

@@ -27,7 +27,7 @@ namespace LAB5
             for (int i = 0; i < 8; i++)
             {
                 points.Add(new MyPoint(0, 0, 0));
-                GenerateCoords(points[i]);
+                GeneratePoint(points[i]);
 
                 objects.Add(points[i]);
             }
@@ -48,17 +48,19 @@ namespace LAB5
 
             player.OnPointOverlap += (p) =>
             {
-                GenerateCoords(p);
+                GeneratePoint(p);
                 score++;
             };
         }
 
-        private void GenerateCoords(MyPoint p)
+        private void GeneratePoint(MyPoint p)
         {
             Random rnd = new Random();
 
             p.X = (float)rnd.NextDouble() * pbMain.Width;
             p.Y = (float)rnd.NextDouble() * pbMain.Width;
+
+            p.Size = (float)rnd.NextDouble() * 30 + 30;
         }
 
         private void pbMain_Paint(object sender, PaintEventArgs e)
@@ -67,6 +69,17 @@ namespace LAB5
             g.Clear(Color.White);
 
             UpdatePlayer();
+
+            foreach(var pt in points.ToList())
+            {
+                pt.Size -= 0.4f;
+                pt.X += 0.2f;
+                pt.Y += 0.2f;
+                if (pt.Size <= 0)
+                {
+                    GenerateCoords(pt);
+                }
+            }
 
             // Проверка пересечений
             foreach (var obj in objects.ToList())

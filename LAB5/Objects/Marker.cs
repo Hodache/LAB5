@@ -19,6 +19,11 @@ namespace LAB5.Objects
             g.DrawEllipse(new Pen(Color.Red, 2), -10, -10, 20, 20);
         }
 
+        public override String GetName()
+        {
+            return "Маркер";
+        }
+
         public override GraphicsPath GetGraphicsPath()
         {
             var path = base.GetGraphicsPath();

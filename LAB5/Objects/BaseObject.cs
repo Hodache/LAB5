@@ -12,6 +12,8 @@ namespace LAB5.Objects
         public float Y;
         public float Angle;
 
+        public Action<BaseObject, BaseObject> OnOverlap;
+
         public BaseObject(float x, float y, float angle)
         {
             X = x;
@@ -30,6 +32,11 @@ namespace LAB5.Objects
 
         public virtual void Render(Graphics g)
         {
+        }
+
+        public virtual String GetName()
+        {
+            return "Объект";
         }
 
         public virtual GraphicsPath GetGraphicsPath()
@@ -51,6 +58,14 @@ namespace LAB5.Objects
             var region = new Region(path1);
             region.Intersect(path2);
             return !region.IsEmpty(g);
+        }
+
+        public virtual void Overlap(BaseObject obj)
+        {
+            if (this.OnOverlap != null)
+            {
+                this.OnOverlap(this, obj);
+            }
         }
     }
 }

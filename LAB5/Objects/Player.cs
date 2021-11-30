@@ -13,14 +13,14 @@ namespace LAB5.Objects
         public Action<Obstacle> OnObstacleOverlap;
         public float vX, vY;
 
-        public Player(float x, float y, float angle) : base(x, y, angle)
+        public Player(float x, float y, float angle, Color color) : base(x, y, angle, color)
         {
         }
 
         public override void Render(Graphics g)
         {
             g.FillEllipse(
-                new SolidBrush(Color.DeepSkyBlue),
+                new SolidBrush(Color),
                 -15, -15,
                 30, 30
             );

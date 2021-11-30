@@ -11,15 +11,16 @@ namespace LAB5.Objects
         public float X;
         public float Y;
         public float Angle;
+        public Color Color;
 
         public Action<BaseObject, BaseObject> OnOverlap;
-        public Action OnDisappear;
 
-        public BaseObject(float x, float y, float angle)
+        public BaseObject(float x, float y, float angle, Color color)
         {
             X = x;
             Y = y;
             Angle = angle;
+            Color = color;
         }
 
         public Matrix GetTransform()

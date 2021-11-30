@@ -67,9 +67,9 @@
             this.txtScore.BackColor = System.Drawing.Color.Transparent;
             this.txtScore.Location = new System.Drawing.Point(380, 15);
             this.txtScore.Name = "txtScore";
-            this.txtScore.Size = new System.Drawing.Size(67, 20);
+            this.txtScore.Size = new System.Drawing.Size(59, 20);
             this.txtScore.TabIndex = 2;
-            this.txtScore.Text = "Очки: 10";
+            this.txtScore.Text = "Очки: 0";
             // 
             // Form1
             // 
@@ -80,7 +80,7 @@
             this.Controls.Add(this.pbMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Игра";
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

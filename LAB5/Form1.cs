@@ -19,15 +19,37 @@ namespace LAB5
         List<MyPoint> points = new List<MyPoint>();
         List<Obstacle> obstacles = new List<Obstacle>();
         int score = 0;
+        Darkness darkness;
 
         public Form1()
         {
             InitializeComponent();
 
+            // Создание темной области
+            darkness = new Darkness(-150, 0, 0, Color.Black);
+            objects.Add(darkness);
+            // Делегаты входа в черную область
+            darkness.OnPlayerOverlap += (p) => { player.Color = Color.White; };
+
+            darkness.OnMarkerOverlap += (m) => { marker.Color = Color.White; };
+
+            darkness.OnPointOverlap += (pt) =>{ pt.Color = Color.White; };
+
+            darkness.OnObstacleOverlap += (o) => { o.Color = Color.White; };
+
+            // Делегаты выхода из черной области
+            darkness.OnPlayerRelease += (p) => { player.Color = Color.DeepSkyBlue; };
+
+            darkness.OnMarkerRelease += (m) => { marker.Color = Color.Red; };
+
+            darkness.OnPointRelease += (pt) => { pt.Color = Color.LightGreen; };
+
+            darkness.OnObstacleRelease += (o) => { o.Color = Color.Red; };
+
             // Создание зеленых точек
             for (int i = 0; i < 8; i++)
             {
-                points.Add(new MyPoint(0, 0, 0));
+                points.Add(new MyPoint(0, 0, 0, Color.LightGreen));
                 GeneratePoint(points[i]);
 
                 objects.Add(points[i]);
@@ -36,13 +58,13 @@ namespace LAB5
             // Создание препятствий
             for (int i = 0; i < 6; i++)
             {
-                obstacles.Add(new Obstacle(0, 0, 0));
+                obstacles.Add(new Obstacle(0, 0, 0, Color.Red));
                 GenerateObstacle(obstacles[i]);
 
                 objects.Add(obstacles[i]);
             }
 
-            player = new Player(pbMain.Width / 2, pbMain.Height / 2, 0);
+            player = new Player(pbMain.Width / 2, pbMain.Height / 2, 0, Color.DeepSkyBlue);
             objects.Add(player);
 
             player.OnOverlap += (p, obj) =>
@@ -75,6 +97,7 @@ namespace LAB5
             g.Clear(Color.White);
 
             UpdatePlayer();
+            UpdateDarkness();
 
             // Уменьшаем зеленые круги
             foreach(var pt in points.ToList())
@@ -98,13 +121,31 @@ namespace LAB5
                 }
             }
 
-            // Проверка пересечений
+            // Проверка пересечений с игроком
             foreach (var obj in objects.ToList())
             {
-                if (obj != player && player.Overlaps(obj, g))
+                if (obj != player && player.Overlaps(obj, g) && obj != darkness)
                 {
                     player.Overlap(obj);
                     obj.Overlap(player);
+                }
+            }
+
+            // Проверка входа в черную область
+            foreach (var obj in objects.ToList())
+            {
+                if (obj != darkness && darkness.Overlaps(obj, g))
+                {
+                    darkness.Overlap(obj);
+                }
+            }
+
+            // Проверка выхода из черной области
+            foreach (var obj in objects.ToList())
+            {
+                if (obj != darkness && darkness.Releases(obj, g))
+                {
+                    darkness.Release(obj);
                 }
             }
 
@@ -149,6 +190,15 @@ namespace LAB5
             player.Y += player.vY;
         }
 
+        private void UpdateDarkness()
+        {
+            darkness.X += 5;
+            if (darkness.X >= pbMain.Width)
+            {
+                darkness.X = -pbMain.Width / 3;
+            }
+        }
+
         private void GeneratePoint(MyPoint p)
         {
             Random rnd = new Random();
@@ -179,7 +229,7 @@ namespace LAB5
         {
             if (marker == null)
             {
-                marker = new Marker(0, 0, 0);
+                marker = new Marker(0, 0, 0, Color.Red);
                 objects.Add(marker);
             }
 

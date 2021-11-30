@@ -10,13 +10,13 @@ namespace LAB5.Objects
     {
         public float Size;
 
-        public MyPoint(float x, float y, float angle) : base(x, y, angle)
+        public MyPoint(float x, float y, float angle, Color color) : base(x, y, angle, color)
         {
         }
 
         public override void Render(Graphics g)
         {
-            g.FillEllipse(new SolidBrush(Color.LightGreen), -15, -15, Size, Size);
+            g.FillEllipse(new SolidBrush(Color), -15, -15, Size, Size);
         }
 
         public override String GetName()

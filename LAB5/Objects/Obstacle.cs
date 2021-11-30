@@ -10,13 +10,13 @@ namespace LAB5.Objects
     {
         public int Time;
 
-        public Obstacle(float x, float y, float angle) : base(x, y, angle)
+        public Obstacle(float x, float y, float angle, Color color) : base(x, y, angle, color)
         {
         }
 
         public override void Render(Graphics g)
         {
-            g.FillEllipse(new SolidBrush(Color.Red), -15, -15, 30, 30);
+            g.FillEllipse(new SolidBrush(Color), -15, -15, 30, 30);
         }
 
         public override String GetName()

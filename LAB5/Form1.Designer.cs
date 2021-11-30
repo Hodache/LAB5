@@ -32,6 +32,7 @@
             this.pbMain = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.txtLog = new System.Windows.Forms.RichTextBox();
+            this.txtScore = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,21 +56,34 @@
             // 
             this.txtLog.Location = new System.Drawing.Point(468, 12);
             this.txtLog.Name = "txtLog";
+            this.txtLog.ReadOnly = true;
             this.txtLog.Size = new System.Drawing.Size(208, 450);
             this.txtLog.TabIndex = 1;
             this.txtLog.Text = "";
             // 
+            // txtScore
+            // 
+            this.txtScore.AutoSize = true;
+            this.txtScore.BackColor = System.Drawing.Color.Transparent;
+            this.txtScore.Location = new System.Drawing.Point(380, 15);
+            this.txtScore.Name = "txtScore";
+            this.txtScore.Size = new System.Drawing.Size(67, 20);
+            this.txtScore.TabIndex = 2;
+            this.txtScore.Text = "Очки: 10";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(688, 487);
+            this.Controls.Add(this.txtScore);
             this.Controls.Add(this.txtLog);
             this.Controls.Add(this.pbMain);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -78,6 +92,7 @@
         private System.Windows.Forms.PictureBox pbMain;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.RichTextBox txtLog;
+        private System.Windows.Forms.Label txtScore;
     }
 }
 

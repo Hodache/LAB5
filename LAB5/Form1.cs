@@ -16,10 +16,21 @@ namespace LAB5
         List<BaseObject> objects = new List<BaseObject>();
         Player player;
         Marker marker;
+        List<MyPoint> points = new List<MyPoint>();
+        int score = 0;
 
         public Form1()
         {
             InitializeComponent();
+
+            // Создание зеленых точек
+            for (int i = 0; i < 8; i++)
+            {
+                points.Add(new MyPoint(0, 0, 0));
+                GenerateCoords(points[i]);
+
+                objects.Add(points[i]);
+            }
 
             player = new Player(pbMain.Width / 2, pbMain.Height / 2, 0);
             objects.Add(player);
@@ -35,8 +46,19 @@ namespace LAB5
                 marker = null;
             };
 
-            marker = new Marker(pbMain.Width / 2 + 50, pbMain.Height / 2 + 50, 0);
-            objects.Add(marker);
+            player.OnPointOverlap += (p) =>
+            {
+                GenerateCoords(p);
+                score++;
+            };
+        }
+
+        private void GenerateCoords(MyPoint p)
+        {
+            Random rnd = new Random();
+
+            p.X = (float)rnd.NextDouble() * pbMain.Width;
+            p.Y = (float)rnd.NextDouble() * pbMain.Width;
         }
 
         private void pbMain_Paint(object sender, PaintEventArgs e)
@@ -46,6 +68,7 @@ namespace LAB5
 
             UpdatePlayer();
 
+            // Проверка пересечений
             foreach (var obj in objects.ToList())
             {
                 if (obj != player && player.Overlaps(obj, g))
@@ -55,6 +78,9 @@ namespace LAB5
                 }
             }
 
+            txtScore.Text = $"Очки: {score}";
+
+            // Отрисовка объектов
             foreach (var obj in objects.ToList())
             {
                 g.Transform = obj.GetTransform();
